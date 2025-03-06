@@ -140,7 +140,7 @@ def colored_plot(state_dict, stretch, stress_real, model, data_mode):
     plt.plot(stretch, stress_real, 'k--', linewidth=2.5, label="Real Stress")
     plt.xlabel("Stretch")
     plt.ylabel("Stress")
-    plt.title("Model Prediction" + data_mode)
+    plt.title("Model Prediction for " + data_mode)
     plt.legend(loc='best', fontsize=8, ncol=2)
     plt.grid(True)
     plt.text(0.05, 0.9, f"R²: {r2:.6f}\nLoss: {mse_loss:.6f}", transform=plt.gca().transAxes,
