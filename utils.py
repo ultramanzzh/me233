@@ -5,8 +5,7 @@ import pandas as pd
 from torchmetrics.regression import R2Score, MeanSquaredError
 import torch.nn.functional as F
 
-# from ray.air.examples.custom_trainer import train_dataset
-# from scipy.ndimage import label
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
 def convert_I_TC(Stretch):
@@ -23,8 +22,8 @@ def convert_I_shr(Stretch):
 def convert_P_ten(input):
     # convert output from nn to the prediction of P
     dPsidI1, dPsidI2, Stretch = input
-    one = torch.tensor(1.0, dtype=torch.float32)
-    two = torch.tensor(2.0, dtype=torch.float32)
+    one = torch.tensor(1.0, dtype=torch.float32).to(device)
+    two = torch.tensor(2.0, dtype=torch.float32).to(device)
 
     minus = two * (dPsidI1 * one / torch.square(Stretch) + dPsidI2 * one / torch.pow(Stretch, 3))
     stress = two * (dPsidI1 * Stretch + dPsidI2 * one) - minus
@@ -57,8 +56,8 @@ def dataloader(path, arg, batch_size):
 
     num_test_samples = num_test
 
-    x = torch.tensor(strain).clone().detach()
-    Y = torch.tensor(P, dtype=torch.float32)
+    x = torch.tensor(strain).clone().detach().to(device)
+    Y = torch.tensor(P, dtype=torch.float32).to(device)
 
     dataset = torch.utils.data.TensorDataset(x, Y)
 

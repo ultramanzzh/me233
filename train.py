@@ -8,16 +8,15 @@ from torch.utils.tensorboard import SummaryWriter
 
 from model import Modeldiscover, loss
 import utils
+from utils import device
 
 PATH_CHECKPOINT = os.path.join('trained_models', 'cp-{epoch:03d}.pt')
 DIR_MODEL = 'trained_models'
 
-LEARNING_RATE = 1e-4
+LEARNING_RATE = 1e-3
 NUM_EPOCHS = 20000
 BATCH_SIZE = 8
-WEIGHT_DECAY = 1e-5 # modifying the strength of L2 regularization
-
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+WEIGHT_DECAY = 0 # modifying the strength of L2 regularization
 
 print(f"Using device: {device}")
 
