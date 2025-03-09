@@ -17,7 +17,7 @@ class Selfupdatingpara(nn.Module):
         # Assuming 'input' is of shape [batch, 3]
         acfn1 = torch.pow(self.a, input[:, 0:1]) - 1  # Shape: [batch, 1]
         acfn2 = - torch.log(1 - input2) / torch.log(b)  # Shape: [batch, 1]
-        acfn3 = input[:, 2:3]  # Shape: [batch, 1]
+        acfn3 = input[:, 2:3] # Shape: [batch, 1]
         return acfn1, acfn2, acfn3
 
 class Modeldiscover(nn.Module):
